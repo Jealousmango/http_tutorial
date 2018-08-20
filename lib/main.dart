@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     for(var u in jsonData["results"]) {
       User user = User(u["url"], u["name"]);
-      print(user);
+//      print(user);
       users.add(user);
     }
     print(users.length);
@@ -93,7 +93,12 @@ class _MyHomePageState extends State<MyHomePage> {
 class DetailPage extends StatelessWidget {
   final User user;
 
+
   DetailPage(this.user);
+//  var pokedata = http.get("https://pokeapi.co/api/v2/pokemon/");
+//
+//  var jsonData = json.decode(pokedata.body);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,12 +109,14 @@ class DetailPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: new Card(
           child: new Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              const ListTile(
+              new ListTile(
                 leading: const Icon(Icons.pregnant_woman),
-                title: Text(user.name),
-                subtitle: const Text("Type will go here!"),
+                title: new Text(
+                    user.name
+                ),
+                subtitle: new Text(user.url),
               )
             ],
           ),
@@ -124,6 +131,7 @@ class User {
 //  final String about;
   final String url;
   final String name;
+//  Possibly add further attributes for User/Pokemon objects, appending additional details to objects once loaded into DetailPage
 //  final String email;
 //  final String picture;
 
