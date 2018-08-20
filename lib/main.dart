@@ -32,15 +32,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<List<User>> _getUsers() async {
 //  Collect JSON data from http request and store into data variable
-    var data = await http.get("https://www.json-generator.com/api/json/get/cfwZmvEBbC?indent=2");
+    var data = await http.get("https://pokeapi.co/api/v2/pokemon/");
 
     var jsonData = json.decode(data.body);
 
     List<User> users = [];
 
-    for(var u in jsonData) {
-      User user = User(u["index"], u["about"], u["name"], u["email"], u["picture"]);
-
+    for(var u in jsonData["results"]) {
+      User user = User(u["url"], u["name"]);
+      print(user);
       users.add(user);
     }
     print(users.length);
@@ -72,12 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          snapshot.data[index].picture
-                        ),
                       ),
                       title: Text(snapshot.data[index].name),
-                      subtitle: Text(snapshot.data[index].email),
                       onTap: () {
                         Navigator.push(context,
                           new MaterialPageRoute(builder: (context) => DetailPage(snapshot.data[index]))
@@ -109,11 +105,12 @@ class DetailPage extends StatelessWidget {
 }
 
 class User {
-  final int index;
-  final String about;
+//  final int index;
+//  final String about;
+  final String url;
   final String name;
-  final String email;
-  final String picture;
+//  final String email;
+//  final String picture;
 
-  User(this.index, this.about, this.name, this.email, this.picture);
+  User(this.url,this.name);
 }
