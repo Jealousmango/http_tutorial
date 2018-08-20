@@ -100,6 +100,21 @@ class DetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(user.name),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: new Card(
+          child: new Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const ListTile(
+                leading: const Icon(Icons.pregnant_woman),
+                title: Text(user.name),
+                subtitle: const Text("Type will go here!"),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
